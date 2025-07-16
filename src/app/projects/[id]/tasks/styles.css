@@ -20,7 +20,7 @@
   gap: 8px;
 }
 
-.members-title {
+.tasks-title {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -33,7 +33,7 @@
   }
 }
 
-.users-list {
+.task-list {
   display: flex;
   flex-direction: column;
   gap: 16px;
