@@ -1,17 +1,17 @@
-import styles from "./ContentTopBarDesktop.module.css";
+import styles from "./ContentTopBarMobile.module.css";
 
-import { TabPanelDesktop } from "../../tasks/TabPanel";
 import { Icon } from "@/presentation/ui/Icon";
 import { ICONS } from "@/infrastructure/config/icons";
+import { TabPanelMobile } from "../../tasks/TabPanel/TabPanelMobile";
 
-interface ContentTopBarDesktopProps {
+interface ContentTopBarMobileProps {
   onClick: () => void;
 }
 
-export function ContentTopBarDesktop({ onClick }: ContentTopBarDesktopProps) {
+export function ContentTopBarMobile({ onClick }: ContentTopBarMobileProps) {
   return (
     <div className={styles.container}>
-      <TabPanelDesktop />
+      <TabPanelMobile />
       <button onClick={onClick} className={styles.sortButton}>
         <Icon as={ICONS.sort} size="24px" inheritColor />
       </button>
