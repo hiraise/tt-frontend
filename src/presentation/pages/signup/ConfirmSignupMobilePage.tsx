@@ -3,18 +3,18 @@
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 
-import styles from "./ConfirmPasswordRecoveryMobilePage.module.css";
+import styles from "./ConfirmSignupMobilePage.module.css";
 
+import { useResendEmail } from "@/application/auth/hooks/useResendEmail";
 import { authTexts } from "@/shared/locales/auth";
-import { openUserInbox } from "@/shared/utils/openUserInbox";
+import { SubmitButton, TitleWrapper } from "@/presentation/widgets/auth/_components";
 import { ASSETS } from "@/infrastructure/config/assets";
 import { ResendEmailButton } from "@/presentation/widgets/auth/ResendEmailButton";
-import { SubmitButton, TitleWrapper } from "@/presentation/widgets/auth/_components";
-import { usePasswordRecovery } from "@/application/auth/hooks/usePasswordRecovery";
+import { openUserInbox } from "@/shared/utils/openUserInbox";
 
-export function ConfirmPasswordRecoveryMobilePage() {
+export function ConfirmSignupMobilePage() {
   const email = useSearchParams().get("email") || "";
-  const { mutateAsync: recovery } = usePasswordRecovery();
+  const { mutateAsync: resendVerification } = useResendEmail();
 
   if (email.length === 0) return null;
 
@@ -28,14 +28,14 @@ export function ConfirmPasswordRecoveryMobilePage() {
 
         <Image
           className={styles.cover}
-          src={ASSETS.images.passwordRecovery}
+          src={ASSETS.images.resendVerification}
           alt={authTexts.checkEmailAlt}
           width={400}
           height={224}
         />
       </div>
       <div className={styles.buttons}>
-        <ResendEmailButton initialDelay={10} onResend={() => recovery(email)} />
+        <ResendEmailButton initialDelay={10} onResend={() => resendVerification(email)} />
         <SubmitButton className="btn-font-m" onClick={() => openUserInbox(email)}>
           {authTexts.openEmail}
         </SubmitButton>
@@ -49,7 +49,7 @@ interface CheckEmailMessageProps {
 }
 
 function CheckEmailMessage({ email }: CheckEmailMessageProps) {
-  const parts = authTexts.checkEmailDescription.split("{email}");
+  const parts = authTexts.checkEmailDescription2.split("{email}");
 
   return (
     <p className="body-reg">
